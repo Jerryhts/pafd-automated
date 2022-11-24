@@ -7,11 +7,11 @@ from sys import exit as sys_exit
 from getpass import getpass
 import re
 import base64
-import easyocr
+# import easyocr
 import io
 import numpy
-from PIL import Image
-from PIL import ImageEnhance
+# from PIL import Image
+# from PIL import ImageEnhance
 
 from requests import session, post, adapters
 adapters.DEFAULT_RETRIES = 5
@@ -163,6 +163,10 @@ class Zlapp(Fudan):
         else:
             print("\n\n*******未提交*******")
             self.last_info = last_info["d"]["oldInfo"]
+            self.last_info.update({
+                "realname": last_info["d"]["uinfo"]["realname"],
+                "number": last_info["d"]["uinfo"]["role"]["number"]
+            })
             
     def read_captcha(self, img_byte):
         img = Image.open(io.BytesIO(img_byte)).convert('L')
@@ -208,9 +212,9 @@ class Zlapp(Fudan):
         district = geo_api_info["addressComponent"].get("district", "")
         
         while(True):
-            print("◉正在识别验证码......")
-            code = self.validate_code()
-            print("◉验证码为:", code)
+            # print("◉正在识别验证码......")
+            # code = self.validate_code()
+            # print("◉验证码为:", code)
             self.last_info.update(
                 {
                     "tw": "13",
@@ -220,7 +224,9 @@ class Zlapp(Fudan):
                     #"sfzx": "1",  # 是否在校
                     #"fxyy": "",  # 返校原因
                     "code": code,
-
+                    "sfjcgrq": 0,
+                    "sfhbtl": 0,
+                    "jzymifjzj": ""
                 }
             )
             # print(self.last_info)
