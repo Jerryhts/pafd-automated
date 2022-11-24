@@ -14,7 +14,7 @@ import numpy
 # from PIL import ImageEnhance
 
 from requests import session, post, adapters
-import urllib3
+import urllib3, ssl
 adapters.DEFAULT_RETRIES = 5
 
 class CustomHttpAdapter (adapters.HTTPAdapter):
@@ -32,9 +32,9 @@ class CustomHttpAdapter (adapters.HTTPAdapter):
 def get_legacy_session():
     ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
     ctx.options |= 0x4  # OP_LEGACY_SERVER_CONNECT
-    session = session()
-    session.mount('https://', CustomHttpAdapter(ctx))
-    return session
+    mySession = session()
+    mySession.mount('https://', CustomHttpAdapter(ctx))
+    return mySession
 
 class Fudan:
     """
