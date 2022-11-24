@@ -7,11 +7,11 @@ from sys import exit as sys_exit
 from getpass import getpass
 import re
 import base64
-# import easyocr
+import easyocr
 import io
 import numpy
-# from PIL import Image
-# from PIL import ImageEnhance
+from PIL import Image
+from PIL import ImageEnhance
 
 from requests import session, post, adapters
 import urllib3, ssl
