@@ -228,9 +228,9 @@ class Zlapp(Fudan):
         district = geo_api_info["addressComponent"].get("district", "")
         
         while(True):
-            # print("◉正在识别验证码......")
-            # code = self.validate_code()
-            # print("◉验证码为:", code)
+            print("◉正在识别验证码......")
+            code = self.validate_code()
+            print("◉验证码为:", code)
             self.last_info.update(
                 {
                     "tw": "13",
